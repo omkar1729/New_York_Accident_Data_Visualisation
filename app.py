@@ -6,8 +6,12 @@ import plotly.express as px
 
 import streamlit.components.v1 as components
 
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
 DATE_TIME = "date/time"
-Data_URL = ("https://transfer.sh/pYabt/Motor_Vehicle_Collisions_-_Crashes.csv")
+Data_URL = ("https://drive.google.com/file/d/14IoZ2P3DTC67xqHMyiy7B0GHi4KA4U_j/view?usp=sharing")
 st.title("Motor vehicle collision in new york city")
 st.markdown("## Dashboard to visualise motor vehicle crash statistics in New York city ")
 
