@@ -11,7 +11,7 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 DATE_TIME = "date/time"
-Data_URL = ("https://drive.google.com/file/d/14IoZ2P3DTC67xqHMyiy7B0GHi4KA4U_j/view?usp=sharing")
+Data_URL = ("https://archive.org/download/motor-vehicle-collisions-crashes/Motor_Vehicle_Collisions_-_Crashes.csv")
 st.title("Motor vehicle collision in new york city")
 st.markdown("## Dashboard to visualise motor vehicle crash statistics in New York city ")
 
@@ -19,6 +19,7 @@ st.markdown("## Dashboard to visualise motor vehicle crash statistics in New Yor
 
 def load_data(n):
     datafr = pd.read_csv(Data_URL, nrows=n, parse_dates=[['CRASH DATE', 'CRASH TIME']])
+    
     datafr.dropna(subset=['LATITUDE', 'LONGITUDE'], inplace=True)
     lower_case = lambda x: str(x).lower()
     datafr.rename(lower_case, axis='columns', inplace=True)
@@ -26,13 +27,13 @@ def load_data(n):
     return datafr
 
 
-data = load_data(100000)
+data = load_data(100)
 
 st.header("Number of Injuries in NYC")
 injured = st.slider("Number of people", 0, 19)
 st.map(data.query('`number of persons injured` >= @injured')[['latitude', 'longitude']].dropna())
 
-st.write()
+
 
     
 st.header("How many collisions occur during a given time of day?")
